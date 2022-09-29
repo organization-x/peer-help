@@ -17,7 +17,7 @@ def tech_stack_model(input):
             presence_penalty = 0
         )
         return response["choices"][0]["text"]
-    except:
+    except Exception as e:
         return "tech_stack error" # placeholder for now
 
 """
