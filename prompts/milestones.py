@@ -17,7 +17,7 @@ def milestones_model(input):
             presence_penalty = 0
         )
         return response["choices"][0]["text"]
-    except:
+    except Exception as e:
         return "milestones error" # placeholder for now
 
 """
