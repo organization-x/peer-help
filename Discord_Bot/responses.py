@@ -1,7 +1,4 @@
 
-from email import message
-
-
 def handle_response(message) -> str:
     
     if message == 'hello':
