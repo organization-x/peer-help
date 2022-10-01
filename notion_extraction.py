@@ -5,6 +5,7 @@ notion_token = str(os.getenv('NOTION_TOKEN'))
 
 def extract_id_from_url(url): 
     return url.split('-')[-1]
+page_id = extract_id_from_url('place holder')
 
 def extract_product_spec_text(page_id):
 
