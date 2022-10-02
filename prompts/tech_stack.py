@@ -18,7 +18,7 @@ def tech_stack_model(string):
         response = openai.Completion.create(
             model = "text-davinci-002",
             prompt = f"The following paragraph is the technology stack section of a product specification. Evaluate how well the technology stack has been written and give specific feedback on what can be improved. Write several in-depth sentences.\n{string}",
-            temperature = 0.2,
+            temperature = 0.1,
             max_tokens = 512,
             top_p = 1,
             frequency_penalty = 0,
