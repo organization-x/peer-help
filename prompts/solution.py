@@ -31,6 +31,6 @@ def solution_model(string):
 
 # for internal testing
 
-TEST_INPUT = "We introduce PEER — the Peer Editing and Efficiency Robot. PEER allows anyone to receive detailed, constructive feedback on their product spec to ensure that they are following best industry practices and that their product is off to a good start. Simply give PEER a link to your product spec as input, and PEER will give constructive feedback and suggestions on how to make sure you can make the value of your product clear, relieving you from spending the time needed to get feedback from a peer. Just go directly to the end goal with PEER. PEER will bring value to our company through its time-saving abilities by automating a crucial task generally performed by humans."
-print(solution_model(TEST_INPUT))
+""" TEST_INPUT = "We introduce PEER — the Peer Editing and Efficiency Robot. PEER allows anyone to receive detailed, constructive feedback on their product spec to ensure that they are following best industry practices and that their product is off to a good start. Simply give PEER a link to your product spec as input, and PEER will give constructive feedback and suggestions on how to make sure you can make the value of your product clear, relieving you from spending the time needed to get feedback from a peer. Just go directly to the end goal with PEER. PEER will bring value to our company through its time-saving abilities by automating a crucial task generally performed by humans."
 
+print(solution_model(TEST_INPUT)) """

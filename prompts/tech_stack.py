@@ -31,8 +31,8 @@ def tech_stack_model(string):
 
 # for internal testing
 
-TEST_INPUT = "- Python (Discord.py, Django)\
+""" TEST_INPUT = "- Python (Discord.py, Django)\
 - OpenAI’s GPT-3 API\
 - Amazon EC2"
-print(tech_stack_model(TEST_INPUT))
 
+print(tech_stack_model(TEST_INPUT)) """

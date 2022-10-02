@@ -30,8 +30,9 @@ def happy_path_model(string):
 
 # for internal testing
 
-TEST_INPUT = "1. Prompt-engineering GPT-3 to numerically evaluate sections to determine the prompt that is given to the GPT-3 model for feedback generation.\
+""" TEST_INPUT = "1. Prompt-engineering GPT-3 to numerically evaluate sections to determine the prompt that is given to the GPT-3 model for feedback generation.\
 2. Prompt-engineering GPT-3 to generate feedback based on numerical scores given by the scoring method.\
 3. Extracting and parsing text from Notion product specs into individual sections (problem statement, solution, etc.)\
 4. Backend to feed sections to the scoring method to the GPT-3 model using a bot command and generating an embed."
-print(happy_path_model(TEST_INPUT))
+
+print(happy_path_model(TEST_INPUT)) """
