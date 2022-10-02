@@ -17,7 +17,7 @@ def target_users_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is explaining the audience or target userbase of a product specification. Provide a number from a scale of 1-100 that rates how well it answers 'who is this for?'. After providing a score, explain why the score was given and what could potentially be improved upon if anything. You must give the score first and then write several in-depth sentences.\n{string}",
+            prompt = f"The following paragraph is explaining the audience or target userbase of a product specification. Evaluate how well written it is and give specific feedback on what can be improved. Write several in-depth sentences.\n{string}",
             temperature = 0.2,
             max_tokens = 512,
             top_p = 1,
