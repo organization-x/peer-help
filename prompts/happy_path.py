@@ -17,8 +17,8 @@ def happy_path_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following is a part of a bigger product spec and is meant to describe the path that a team must take to achieve a result. Score the text from 1-100 on how well it does its task. Explain why the score was given and provide specific feedback on what could be improved. \n {string}",
-            temperature = 0.2,
+            prompt = f"The following paragraph is the happy path section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the happy path has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.\n{string}",
+            temperature = 0.1,
             max_tokens = 512,
             top_p = 1,
             frequency_penalty = 0,
@@ -28,9 +28,10 @@ def happy_path_model(string):
     except Exception as e:
         return f"happy_path: {e}" # placeholder for now
 
-"""
 # for internal testing
 
-TEST_INPUT = ""
-print(happy_path_model(TEST_INPUT)) 
-"""
+TEST_INPUT = "1. Prompt-engineering GPT-3 to numerically evaluate sections to determine the prompt that is given to the GPT-3 model for feedback generation.\
+2. Prompt-engineering GPT-3 to generate feedback based on numerical scores given by the scoring method.\
+3. Extracting and parsing text from Notion product specs into individual sections (problem statement, solution, etc.)\
+4. Backend to feed sections to the scoring method to the GPT-3 model using a bot command and generating an embed."
+print(happy_path_model(TEST_INPUT))

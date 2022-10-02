@@ -17,7 +17,7 @@ def tech_stack_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following information is a tech stack consisting of the programming languages, frameworks, a database, front-end tools, back-end tools, and applications connected via APIs that a company will use to build a product. Score the following information from 1-100 based on the quality of tech stack items and explain why the score was given. \n {string}",
+            prompt = f"The following paragraph is the technology stack section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the technology stack has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.\n{string}",
             temperature = 0.2,
             max_tokens = 512,
             top_p = 1,
@@ -28,9 +28,11 @@ def tech_stack_model(string):
     except Exception as e:
         return f"tech_stack: {e}" # placeholder for now
 
-"""
+
 # for internal testing
 
-TEST_INPUT = ""
+TEST_INPUT = "- Python (Discord.py, Django)\
+- OpenAI’s GPT-3 API\
+- Amazon EC2"
 print(tech_stack_model(TEST_INPUT))
-"""
+
