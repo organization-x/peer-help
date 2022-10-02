@@ -30,7 +30,7 @@ def milestones_model(string):
 
 # for internal testing
 
-TEST_INPUT = "- ML:\
+""" TEST_INPUT = "- ML:\
     - Automating prompt-engineering the GPT-3 API to generate valuable feedback.\
     - Developing a scoring method to assign each section a score to determine the prompt that will be given to the GPT-3 model.\
     - Testing and Evaluation of Generated Output.\
@@ -44,4 +44,5 @@ TEST_INPUT = "- ML:\
     - Testing and Deployment\
 \
 In addition, our milestones also include ensuring that our success criteria is being met by monitoring and prioritizing our success metrics - or at least the metrics we can monitor for now (linter score, amount of testing code)."
-print(milestones_model(TEST_INPUT))
+
+print(milestones_model(TEST_INPUT)) """

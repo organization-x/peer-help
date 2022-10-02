@@ -31,9 +31,9 @@ def schedule_model(string):
 
 # for internal testing
 
-TEST_INPUT = "**Week 2:** Finalized product spec + each team members must have completed tutorials / reviewed resources and be able to speak to what is required as part of the best practices for their part in the project\
+""" TEST_INPUT = "**Week 2:** Finalized product spec + each team members must have completed tutorials / reviewed resources and be able to speak to what is required as part of the best practices for their part in the project\
 **Week 5:** Local MVP of the product\
 **Week 8:** Live MVP of the product that someone else can use\
 **Week 10:** Launched on [Product Hunt](https://producthunt.com/) (Note it takes 1 week after account creation to post)"
-print(schedule_model(TEST_INPUT))
 
+print(schedule_model(TEST_INPUT)) """
