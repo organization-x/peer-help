@@ -17,10 +17,10 @@ def schedule_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is the schedule section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the schedule has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.\n{string}",
-            temperature = 0.1,
+            prompt = f"The following paragraph is the schedule section of a product specification. Evaluate how well the schedule has been written and planned out while giving specific feedback what can be improved. Write several in-depth sentences.\n{string}",
+            temperature = 1,
             max_tokens = 512,
-            top_p = 1,
+            top_p = 0.2,
             frequency_penalty = 0,
             presence_penalty = 0
         )
@@ -31,9 +31,9 @@ def schedule_model(string):
 
 # for internal testing
 
-""" TEST_INPUT = "**Week 2:** Finalized product spec + each team members must have completed tutorials / reviewed resources and be able to speak to what is required as part of the best practices for their part in the project\
+"""TEST_INPUT = "**Week 2:** Finalized product spec + each team members must have completed tutorials / reviewed resources and be able to speak to what is required as part of the best practices for their part in the project\
 **Week 5:** Local MVP of the product\
 **Week 8:** Live MVP of the product that someone else can use\
 **Week 10:** Launched on [Product Hunt](https://producthunt.com/) (Note it takes 1 week after account creation to post)"
 
-print(schedule_model(TEST_INPUT)) """
+print(schedule_model(TEST_INPUT))"""
