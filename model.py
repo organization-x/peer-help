@@ -1,10 +1,4 @@
-from prompts.problem import problem_model
-from prompts.solution import solution_model
-from prompts.target_users import target_users_model
-from prompts.tech_stack import tech_stack_model
-from prompts.milestones import milestones_model
-from prompts.schedule import schedule_model
-from prompts.happy_path import happy_path_model
+from attr import s
 from notion_extraction import extract_product_spec_text, parse_product_spec_text, extract_id_from_url
 import requests
 #from text.peer import notion_token
@@ -98,7 +92,7 @@ async def main(url):
 
     prompts = get_prompts(parse_product_spec_text(extract_product_spec_text(extract_id_from_url(url))))
     
-    async with aiohttp.ClientSession(headers = {'authorization' : 'bearer token here'}) as session:
+    async with aiohttp.ClientSession(headers = {'authorization' : 'Bearer sess-7G9MTV3wAzEtuVs3li8ZeUtLZXoooNFavnGhTbVO'}) as session:
 
         tasks = []
         for prompt in prompts:
@@ -110,7 +104,7 @@ async def main(url):
     total_feedback = '\n\n'.join(feedbacks)
 
     feedback_summary = requests.post('https://api.openai.com/v1/engines/text-davinci-002/completions',
-        headers = {'authorization' : 'bearer token here'},
+        headers = {'authorization' : 'Bearer sess-7G9MTV3wAzEtuVs3li8ZeUtLZXoooNFavnGhTbVO'},
         json = {
             'prompt' : f"The following text is written feedback of a product specification. Write a one-hundred fifty word summary of the feedback. The summary must be one paragraph and well-written.\n\nFEEDBACK\n\n{total_feedback}",
             'temperature' : 0.3,
@@ -123,7 +117,6 @@ async def main(url):
  
     return feedback_summary['choices'][0]['text']
     
-
-
-print(asyncio.run(main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10')))
-
+summarization = asyncio.run(main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10'))
+print(summarization)
+#summarization = summarization.split("SPLITPOINT")

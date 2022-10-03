@@ -98,4 +98,8 @@ def parse_product_spec_text(product_spec_text): # separates product spec text in
     parsed_text = {match_name_to_label(key) : '\n'.join(value) for key, value in parsed_text.items()}
 
     return parsed_text
-    
+
+
+
+# FOR TESTING PURPOSED
+#print(parse_product_spec_text(extract_product_spec_text(extract_id_from_url("https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10"))))
