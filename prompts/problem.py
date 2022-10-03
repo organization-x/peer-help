@@ -17,10 +17,10 @@ def problem_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is the problem statement section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the problem statement has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.\n{string}",
-            temperature = 0.1,
+            prompt = f"The following paragraph is the problem statement section of a product specification. Evaluate how well the problem statement has been written and give specific feedback on what can be improved. Don't look at the solution. Write several in-depth sentences.\n{string}",
+            temperature = 1,
             max_tokens = 512,
-            top_p = 1,
+            top_p = 0.5,
             frequency_penalty = 0,
             presence_penalty = 0
         )
@@ -30,6 +30,6 @@ def problem_model(string):
 
 # for internal testing
 
-""" TEST_INPUT = "As a company, we rely on community feedback to ensure that our products bring value to the company by following industry best practices. However, there is not enough time in the day to give detailed, thoughtful feedback on the work of each person. This lack of feedback often leads to products that are not up to industry standards. Thoughtful feedback is especially important when drafting product specs. Without a solid product spec that clearly defines your problem statement with a high-level solution, your product is doomed from the start. Our company needs a way to give detailed feedback on product specs in a way that is efficient and effective despite the fact that not everyone has time to do so."
+TEST_INPUT = "As a company, we rely on community feedback to ensure that our products bring value to the company by following industry best practices. However, there is not enough time in the day to give detailed, thoughtful feedback on the work of each person. This lack of feedback often leads to products that are not up to industry standards. Thoughtful feedback is especially important when drafting product specs. Without a solid product spec that clearly defines your problem statement with a high-level solution, your product is doomed from the start. Our company needs a way to give detailed feedback on product specs in a way that is efficient and effective despite the fact that not everyone has time to do so."
 
-print(problem_model(TEST_INPUT)) """
+print(problem_model(TEST_INPUT))
