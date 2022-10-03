@@ -22,60 +22,68 @@ def get_prompts(parsed_product_spec):
 
     label_to_prompt = {
         'Problem Statement' : {
-            'prompt' : f"The following paragraph is the problem statement section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the problem statement has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.",
-            'temperature' : 0.1,
+            'prompt' : f"The following paragraph is the problem statement section of a product specification. Evaluate how well the problem statement has been written and give specific feedback on what can be improved. Proposed solutions are not a part of the problem statement and should not be addressed. Write several in-depth sentences.",
+            'temperature' : 0.5,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
             'presence_penalty' : 0
         },
         'Solution Statement' : {
-            'prompt' : f"The following paragraph is the solution statement of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the solution statement has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.",
-            'temperature' : 0.1,
+            'prompt' : f"The following paragraph is the solution statement section of a product specification. Evaluate how well the solution statement has been written and give specific feedback on what can be improved. Write several in-depth sentences.",
+            'temperature' : 1,
             'max_tokens' : 512,
-            'top_p' : 1,
+            'top_p' : 0.3,
             'frequency_penalty' : 0,
             'presence_penalty' : 0
         },
         'Who Has This Problem?' : {
-            'prompt' : f"The following paragraph is explaining the audience or target userbase of a product specification. Provide a number from a scale of 1-100 that rates how well it answers 'who is this for?'. After providing a score, explain why the score was given and what could potentially be improved upon if anything. You must give the score first and then write several in-depth sentences.",
+            'prompt' : f"The following paragraph is the target users section of a product specification. Evaluate how well it has been written and give specific feedback on what can be improved. Write several in-depth sentences.",
             'temperature' : 0.2,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
-            'presence_penalty' : 0
+            'presence_penalty' : 1
         },
         'Milestones' : {
-            'prompt' : f"The following paragraph is the milestones section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the milestones have been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.",
-            'temperature' : 0.1,
+            'prompt' : f"The following paragraph is the milestones section of a product specification. Evaluate how well the milestones have been written and give specific feedback on what can be improved. Write several in-depth sentences.",
+            'temperature' : 1,
             'max_tokens' : 512,
-            'top_p' : 1,
+            'top_p' : 0.5,
             'frequency_penalty' : 0,
             'presence_penalty' : 0
         },
         'Schedule of Deliverables' : {
-            'prompt' : f"The following paragraph is the schedule section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the schedule has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.",
-            'temperature' : 0.1,
+            'prompt' : f"The following paragraph is the schedule section of a product specification. Evaluate how well the schedule has been written and planned out while giving specific feedback what can be improved. Write several in-depth sentences.",
+            'temperature' : 1,
             'max_tokens' : 512,
-            'top_p' : 1,
+            'top_p' : 0.2,
             'frequency_penalty' : 0,
             'presence_penalty' : 0
         },
         'Tech Stack' : {
-            'prompt' : f"The following paragraph is the technology stack section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the technology stack has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.",
-            'temperature' : 0.2,
+            'prompt' : f"The following paragraph is the technology stack section of a product specification. Evaluate how well the technology stack has been written and give specific feedback on what can be improved. Write several in-depth sentences.",
+            'temperature' : 1,
             'max_tokens' : 512,
-            'top_p' : 1,
+            'top_p' : 0.5,
+            'frequency_penalty' : 0,
+            'presence_penalty' : 1
+        },
+        'Happy Path' : {
+            'prompt' : f"The following paragraph is the happy path section of a product specification. Evaluate how well the happy path has been written and give specific feedback on what can be improved. Write several in-depth sentences.",
+            'temperature' : 0.5,
+            'max_tokens' : 512,
+            'top_p' : 0.5,
             'frequency_penalty' : 0,
             'presence_penalty' : 0
         },
-        'Happy Path' : {
-            'prompt' : f"The following paragraph is the happy path section of a product specification. First, evaluate and respond with a precise score from 1-100 with how well the happy path has been written. Next, explain why this score was given along with specific feedback on what can be improved. You must give the score first and then write several in-depth sentences.",
-            'temperature' : 0.1,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
+        'Success Criteria' : {
+            'prompt': f"The following paragraph is the success criteria section of a product specification. Evaluate how well the success criteria has been described. Give specific feedback on what can be improved. Write several in-depth sentences.",
+            'temperature': 1,
+            'max_tokens': 512,
+            'top_p': 0.3,
+            'frequency_penalty': 0,
+            'presence_penalty': 0
         }
     }
 
