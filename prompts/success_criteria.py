@@ -15,10 +15,10 @@ def success_criteria(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is the success criteria of a product specification. Evaluate how well the success criteria has been written and give specific feedback on what can be improved. Write several in-depth sentences.\n{string}",
-            temperature = 0.1,
+            prompt = f"The following paragraph is the success criteria section of a product specification. Evaluate how well the success criteria has been described. Give specific feedback on what can be improved. Write several in-depth sentences.\n{string}",
+            temperature = 1,
             max_tokens = 512,
-            top_p = 1,
+            top_p = 0.3,
             frequency_penalty = 0,
             presence_penalty = 0
         )
@@ -29,5 +29,5 @@ def success_criteria(string):
 
 # for internal testing
 
-""" TEST_INPUT = "If our product isn’t appealing to users through the feedback it provides, and they don’t find the product useful, then users won’t use it — simple as that. For that reason, the user experience is also an important aspect of our success criteria and one that we will use to make adjustments to the underlying model. In addition, another criterion for success is whether our user trusts that the model is competent at generating quality product specs. If the model were to take the feedback it gives to the user, and iterates on it’s own by editing the section it’s assessing, would the edited section be an improvement over the original section? Basically, does the model knows what it’s doing when it comes to assessing product specs?"
-print(success_criteria(TEST_INPUT)) """
+TEST_INPUT = "If our product isn’t appealing to users through the feedback it provides, and they don’t find the product useful, then users won’t use it — simple as that. For that reason, the user experience is also an important aspect of our success criteria and one that we will use to make adjustments to the underlying model. In addition, another criterion for success is whether our user trusts that the model is competent at generating quality product specs. If the model were to take the feedback it gives to the user, and iterates on it’s own by editing the section it’s assessing, would the edited section be an improvement over the original section? Basically, does the model knows what it’s doing when it comes to assessing product specs?"
+print(success_criteria(TEST_INPUT))
