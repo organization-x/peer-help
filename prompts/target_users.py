@@ -31,6 +31,6 @@ def target_users_model(string):
 
 # for internal testing
 
-TEST_INPUT = "Our solution saves time for internal team members and their peers or supervisors by reducing the number of exchanges needed to iterate and improve their product spec. It also saves time for members of the AI Camp Discord who are looking for feedback on their product spec in the same manner. On a larger scale, anyone writing product specs has this problem, which presents a greater opportunity for us. However, for the MVP, we’re focused on product spec drafting by the AI Camp Internal Team."
+"""TEST_INPUT = "Our solution saves time for internal team members and their peers or supervisors by reducing the number of exchanges needed to iterate and improve their product spec. It also saves time for members of the AI Camp Discord who are looking for feedback on their product spec in the same manner. On a larger scale, anyone writing product specs has this problem, which presents a greater opportunity for us. However, for the MVP, we’re focused on product spec drafting by the AI Camp Internal Team."
 
-print(target_users_model(TEST_INPUT))
+print(target_users_model(TEST_INPUT))"""
