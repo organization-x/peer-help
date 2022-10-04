@@ -18,11 +18,11 @@ def tech_stack_model(string):
         response = openai.Completion.create(
             model = "text-davinci-002",
             prompt = f"The following paragraph is the technology stack section of a product specification. Evaluate how well the technology stack has been written and give specific feedback on what can be improved. Write several in-depth sentences.\n{string}",
-            temperature = 0.1,
+            temperature = 1,
             max_tokens = 512,
-            top_p = 1,
+            top_p = 0.5,
             frequency_penalty = 0,
-            presence_penalty = 0
+            presence_penalty = 1
         )
         return response["choices"][0]["text"]
     except Exception as e:
@@ -31,8 +31,8 @@ def tech_stack_model(string):
 
 # for internal testing
 
-""" TEST_INPUT = "- Python (Discord.py, Django)\
+"""TEST_INPUT = "- Python (Discord.py, Django)\
 - OpenAI’s GPT-3 API\
 - Amazon EC2"
 
-print(tech_stack_model(TEST_INPUT)) """
+print(tech_stack_model(TEST_INPUT))"""
