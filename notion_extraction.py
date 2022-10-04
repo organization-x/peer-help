@@ -1,7 +1,7 @@
 import requests
 import os
 
-notion_token = str(os.getenv('NOTION_TOKEN'))
+notion_token = str('NOTION TOKEN')
 
 def extract_id_from_url(url): 
     return url.split('-')[-1]
@@ -98,4 +98,3 @@ def parse_product_spec_text(product_spec_text): # separates product spec text in
     parsed_text = {match_name_to_label(key) : '\n'.join(value) for key, value in parsed_text.items()}
 
     return parsed_text
-    
