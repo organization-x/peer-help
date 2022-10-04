@@ -6,9 +6,9 @@ from model import main
 
 
 
-intents = discord.Intents.default()
-intents.message_content = True
-bot = commands.Bot(command_prefix='#', intents=intents)
+# intents = discord.Intents.default()
+# intents.message_content = True
+bot = commands.Bot(command_prefix='#')
 
 #output = asyncio.run(main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10'))
 
