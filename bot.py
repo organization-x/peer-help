@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 import os
-from model import asyncio
 from model import main
  
 intents = discord.Intents.default()
@@ -21,7 +20,6 @@ async def score(ctx, arg):
 
 @bot.command()
 async def peer(ctx, arg):
-   
    peer = discord.Embed(title="PEER is Reviewing your Product Spec!", url="https://github.com/organization-x/peer-help", description="", color=3447003)
    peer.set_image(url="https://cdn.dribbble.com/users/980063/screenshots/2460821/square-shape-morph2.gif")
 
