@@ -31,5 +31,5 @@ async def peer(ctx):
     await ctx.send(embed=peer, delete_after=7)
     await asyncio.sleep(7)
     await ctx.send(embed=em)
-#token = os.environ['MTAyNTY0MjgzMTU5NzAyMzI0Mg.GWgv5E.O7bNZvuf-wYKZvDMYRrYW5FE08Z6hOysEPcQPM']
+
 bot.run('TOKEN')
