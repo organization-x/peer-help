@@ -93,7 +93,7 @@ async def main(url):
 
     prompts = get_prompts(parse_product_spec_text(extract_product_spec_text(extract_id_from_url(url))))
     
-    async with aiohttp.ClientSession(headers = {'authorization' : 'Bearer sess-n4Vo2Vd8wxpvH5xiIC2kqQdAJzmAhQ2aqNeNrDF9'}) as session:
+    async with aiohttp.ClientSession(headers = {'authorization' : ''}) as session:
 
         tasks = []
         for prompt in prompts:
@@ -105,7 +105,7 @@ async def main(url):
     total_feedback = '\n\n'.join(feedbacks)
 
     feedback_summary = requests.post('https://api.openai.com/v1/engines/text-davinci-002/completions',
-        headers = {'authorization' : 'Bearer sess-n4Vo2Vd8wxpvH5xiIC2kqQdAJzmAhQ2aqNeNrDF9'},
+        headers = {'authorization' : ''},
         json = {
             'prompt' : f"The following text is written feedback of a product specification. Write a one-hundred fifty word summary of the feedback. The summary must be one paragraph and well-written.\n\nFEEDBACK\n\n{total_feedback}",
             'temperature' : 0.3,
