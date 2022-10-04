@@ -119,6 +119,3 @@ async def main(url):
     ).json()
  
     return feedback_summary['choices'][0]['text']
-    
-# summarization = asyncio.run(main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10'))
-# print(summarization)
