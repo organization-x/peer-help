@@ -1,27 +1,35 @@
+from ast import Delete
 import discord
-import model
-import nest_asyncio
-import asyncio
-from notion_extraction import extract_product_spec_text, parse_product_spec_text, extract_id_from_url
-import requests
-import aiohttp 
 from discord.ext import commands
+import os
+from model import asyncio
+from model import main
+from asyncio import sleep
+import time
 
-from discord import client
+
 
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
+#output = asyncio.run(main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10%27'))
+
 @bot.command()
 async def ping(ctx):
-    await ctx.send('pong')
+    output = await main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10%27')
+    asyncio.run(main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10%27'))
+    await ctx.send(output)
 
 @bot.command()
-async def embed(ctx):
-    loop = asyncio.get_event_loop()
-    feedback = loop.run_until_complete(model.main('https://www.notion.so/IncSkill-Website-Product-Spec-673589270f7241dda9cb27fecab8af10'))
-    embed=discord.Embed(title="Sample Embed", url="https://realdrewdata.medium.com/", description= feedback, color=0xFF5733)
-    await ctx.send(embed=embed)                
+async def peer(ctx):
+    peer=discord.Embed(title="PEER is Reviewing your Product Spec", url="", description="", color=0xffffff)
+    peer.set_image(url="https://gifimage.net/wp-content/uploads/2017/10/cool-loading-animation-gif-2.gif")
+    em = discord.Embed(title="YOU NEED TO SET A TITLE")
 
+    #embed=discord.Embed(title="This is a Test", url="", description="hello everyone", color=0x313435)
+    await ctx.send(embed=peer, delete_after=7)
+    await asyncio.sleep(7)
+    await ctx.send(embed=em)
+#token = os.environ['MTAyNTY0MjgzMTU5NzAyMzI0Mg.GWgv5E.O7bNZvuf-wYKZvDMYRrYW5FE08Z6hOysEPcQPM']
 bot.run('TOKEN')
