@@ -16,7 +16,7 @@
   <p align="center">
     Welcome to our One of a Kind AI thats helps you have success with your Programming projects!
     <br />
-    <a href=""><strong>Explore the docs »</strong></a>
+    <a href=""><strong>Explore The Docs »</strong></a>
     <br />
     <br />
     <a href="">View Demo</a>
@@ -59,7 +59,7 @@ Members include Blake Martin, Reign O'Keefe, Vamsee Cheruvu, Dylan Lim, Ian Kerg
 
 ### Built With
 
-For the past 5 weeks Team PEER is build a one of kind AI all with just Pur Python!!
+For the past 5 weeks, Team PEER has built a one of kind AI all with just Pure Python!!
 
  [![Next][Next.js]][Next-url]
 
