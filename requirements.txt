@@ -1,0 +1,5 @@
+aiohttp==3.8.3
+discord.py==2.0.1
+openai==0.23.1
+python-dotenv==0.21.0
+requests==2.28.1
