@@ -16,7 +16,7 @@
   <p align="center">
     Welcome to our One of a Kind AI thats helps you have success with your Programming projects!
     <br />
-    <a href=""><strong>Explore The Docs »</strong></a>
+    <a href="https://docs.google.com/document/d/1TVHHxWStalxJ9Wl_jGEtV6yO9A4AKpri/edit?usp=sharing&ouid=106028197439135945538&rtpof=true&sd=true"><strong>Explore The Docs »</strong></a>
     <br />
     <br />
     <a href="">View Demo</a>
