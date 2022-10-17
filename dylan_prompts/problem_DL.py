@@ -30,6 +30,6 @@ def problem_model(string):
 
 # for internal testing
 
-"""TEST_INPUT = "As a company, we rely on community feedback to ensure that our products bring value to the company by following industry best practices. However, there is not enough time in the day to give detailed, thoughtful feedback on the work of each person. This lack of feedback often leads to products that are not up to industry standards. Thoughtful feedback is especially important when drafting product specs. Without a solid product spec that clearly defines your problem statement with a high-level solution, your product is doomed from the start. Our company needs a way to give detailed feedback on product specs in a way that is efficient and effective despite the fact that not everyone has time to do so."
+""" TEST_INPUT = "As a company, we rely on community feedback to ensure that our products bring value to the company by following industry best practices. However, there is not enough time in the day to give detailed, thoughtful feedback on the work of each person. This lack of feedback often leads to products that are not up to industry standards. Thoughtful feedback is especially important when drafting product specs. Without a solid product spec that clearly defines your problem statement with a high-level solution, your product is doomed from the start. Our company needs a way to give detailed feedback on product specs in a way that is efficient and effective despite the fact that not everyone has time to do so."
 
-print(problem_model(TEST_INPUT))"""
+print(problem_model(TEST_INPUT)) """
