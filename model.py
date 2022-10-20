@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 # until the backend is implemented
 
 load_dotenv()
-openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 import aiohttp
 import asyncio
@@ -23,7 +23,7 @@ def get_prompts(parsed_product_spec):
     label_to_prompt = {
         'Problem Statement' : {
             'prompt' : "The following paragraph is the problem statement section of a product specification. First, respond with feedback on how well the problem statement has been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.1,
+            'temperature' : 0.25,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
@@ -31,7 +31,7 @@ def get_prompts(parsed_product_spec):
         },
         'Solution Statement' : {
             'prompt' : "The following paragraph is the solution statement section of a product specification. First, respond with feedback on how well the solution statement has been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.1,
+            'temperature' : 0.25,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
@@ -39,7 +39,7 @@ def get_prompts(parsed_product_spec):
         },
         'Who Has This Problem?' : {
             'prompt' : "The following paragraph is explaining the audience or target userbase of a product specification. First, respond with feedback on how well the audience is decribed. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.2,
+            'temperature' : 0.25,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
@@ -47,7 +47,7 @@ def get_prompts(parsed_product_spec):
         },
         'Milestones' : {
             'prompt' : "The following paragraph is the milestones section of a product specification. First, respond with feedback on how well the milestones have been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.1,
+            'temperature' : 0.25,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
@@ -55,7 +55,7 @@ def get_prompts(parsed_product_spec):
         },
         'Schedule of Deliverables' : {
             'prompt' : "The following paragraph is the schedule section of a product specification. First, respond with feedback on how well the schedule has been planned. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.1,
+            'temperature' : 0.25,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
@@ -63,7 +63,7 @@ def get_prompts(parsed_product_spec):
         },
         'Tech Stack' : {
             'prompt' : "The following paragraph is the technology stack section of a product specification. First, respond with feedback on how well the technolgy stack has been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.2,
+            'temperature' : 0.25,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
@@ -71,7 +71,7 @@ def get_prompts(parsed_product_spec):
         },
         'Happy Path' : {
             'prompt' : "The following paragraph is the happy path section of a product specification. First, respond with feedback on how well the happy path conveys the general path needed to be taken in this project. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.1,
+            'temperature' : 0.25,
             'max_tokens' : 512,
             'top_p' : 1,
             'frequency_penalty' : 0,
@@ -99,7 +99,7 @@ async def main(url):
     prompts = get_prompts(parse_product_spec_text(extract_product_spec_text(extract_id_from_url(url))))
     
     
-    async with aiohttp.ClientSession(headers = {'authorization' : f'Bearer {openai_api_key_vc}'}) as session:
+    async with aiohttp.ClientSession(headers = {'authorization' : f'Bearer {os.getenv("OPENAI_API_KEY1")}'}) as session:
 
         tasks = []
         for prompt in prompts:
@@ -109,7 +109,7 @@ async def main(url):
         feedbacks = await asyncio.gather(*tasks)
        
     total_feedback = '\n'.join(feedbacks)
-    return total_feedback
+    return feedbacks
     
 
     # for feedback in feedbacks:
@@ -118,7 +118,7 @@ async def main(url):
     
     # feedback_summary = requests.post('https://api.openai.com/v1/engines/text-davinci-002/completions',
         
-    #     headers = {'authorization' : f'Bearer {openai_api_key_vc}'},
+    #     headers = {'authorization' : f'Bearer {OPENAI_API_KEY1}'},
     #     json = {
     #         'prompt' : f"The following text is written feedback of a product specification. Write a 150 WORD SUMMARY of the feedback and include key details.\n\nFEEDBACK\n\n{total_feedback}",
     #         'temperature' : 0.3,
@@ -218,4 +218,3 @@ async def main(url):
 
 
 
-openai_api_key_vc = "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"

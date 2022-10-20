@@ -1,4 +1,4 @@
-from tkinter import Button
+
 import discord
 from discord.ext import commands
 import os
@@ -18,8 +18,9 @@ async def peer(ctx, arg):
 
    await ctx.send(embed=peer, delete_after=7)
    output = await main(arg)
+   total_feedback = '\n'.join(output)
    
-   newEmbed = discord.Embed(title="Product Spec Review", description=output, color=3447003)
+   newEmbed = discord.Embed(title="Product Spec Review", description=total_feedback, color=3447003)
    
    await ctx.send(embed=newEmbed)
 
@@ -31,8 +32,11 @@ async def pages(ctx, arg):
    
    number = 0
    for i in range(len(output)):
-      embeds.append(discord.Embed(title=f"Embed #{(i + 1)}", description=output[number]))
+      if (output[number] != "This section does not provide enough information to give feedback."):
+         
+         embeds.append(discord.Embed(title=f"Embed #{(i + 1)}", description=output[number]))
       number+=1
+
    
    await Paginator.Simple().start(ctx, pages=embeds)
 
