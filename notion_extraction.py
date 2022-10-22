@@ -1,7 +1,11 @@
 import requests
 import os
+from dotenv import load_dotenv
 
-notion_token = os.environ['NOTION_TOKEN']
+load_dotenv()
+
+
+notion_token = os.getenv("OPENAI_API_KEY1")
 
 def extract_id_from_url(url): 
     return url.split('-')[-1]
@@ -17,7 +21,7 @@ def extract_product_spec_text(page_id):
         headers = {
             'accept': 'application/json',
             'Notion-Version': '2022-06-28',
-            'authorization': f'Bearer {notion_token}'
+            'authorization': f'Bearer {os.getenv("NOTION_TOKEN1")}'
         }
 
         response = requests.get(url, headers=headers)
