@@ -40,7 +40,7 @@ async def pages(ctx, arg):
    
    await Paginator.Simple().start(ctx, pages=embeds)
 
-bot.run(os.environ['product_spec_bot'])
+bot.run(os.getenv("BOT_TOKEN"))
 
 # https://cdn.dribbble.com/users/1148781/screenshots/3233207/media/3255674065b3b19a7f4227cd6e3be153.gif
 # https://cdn.dribbble.com/users/980063/screenshots/2460821/square-shape-morph2.gif
