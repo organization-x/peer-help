@@ -17,10 +17,10 @@ def happy_path_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is the happy path section of a product specification. Evaluate how well the happy path has been written and give specific feedback on what can be improved. Write several in-depth sentences.\n{string}",
+            prompt = f"The following paragraph is the happy path section of a product specification. First, evaluate the happy path and provide a score from 1-10. After, give specific feedback on what can be improved.\n\n\n{string}\n\n\nSCORE:",
             temperature = 0.5,
             max_tokens = 512,
-            top_p = 0.5,
+            top_p = 1,
             frequency_penalty = 0,
             presence_penalty = 0
         )
