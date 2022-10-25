@@ -48,10 +48,13 @@ def extract_product_spec_text(page_id):
                             texts.append((rich_text['plain_text'], result_type))
 
                 extract_data_from_notion_page(result['id'])
-                
-    extract_data_from_notion_page(page_id)
+    try:
+        extract_data_from_notion_page(page_id)
     
-    return texts
+        return texts
+    except Exception as e:
+        print(e)
+        return 'invalid'
 
 def jaccard_similarity(list1, list2): # Similarity metric
     
@@ -86,15 +89,22 @@ def parse_product_spec_text(product_spec_text): # separates product spec text in
     
     for text_piece in product_spec_text:
         
-        if text_piece[1][:7] == 'heading':
+        try:
+            if text_piece[1][:7] == 'heading':
             
-            current_heading = text_piece[0]
-            parsed_text[current_heading] = []
+                current_heading = text_piece[0]
+                parsed_text[current_heading] = []
         
-        elif current_heading:
-        
-            parsed_text[current_heading].append(text_piece[0])
+            elif current_heading != None:
+            
+                parsed_text[current_heading].append(text_piece[0])
+        except Exception as e:
+            pass
     
+    if len(parsed_text.items()) == 0:
+        print('very little')
+        print(parsed_text)
+        return 'invalid'
     parsed_text = {match_name_to_label(key) : '\n'.join(value) for key, value in parsed_text.items()}
 
     return parsed_text

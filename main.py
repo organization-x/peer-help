@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import os
+import Paginator
 from model import main
  
 intents = discord.Intents.default()
@@ -9,14 +10,25 @@ bot = commands.Bot(command_prefix='#', intents=intents)
  
 @bot.command()
 async def peer(ctx, arg):
-   peer = discord.Embed(title="PEER is Reviewing your Product Spec!", url="https://github.com/organization-x/peer-help", description="", color=3447003)
-   peer.set_image(url="https://cdn.dribbble.com/users/980063/screenshots/2460821/square-shape-morph2.gif")
 
-   await ctx.send(embed=peer, delete_after=7)
+   if ctx.channel.name in ['kudos', 'bot_testing', 'general']:
+      peer = discord.Embed(title="PEER is Reviewing your Product Spec!", url="https://github.com/organization-x/peer-help", description="", color=3447003)
+      peer.set_image(url="https://cdn.dribbble.com/users/980063/screenshots/2460821/square-shape-morph2.gif")
 
-   output = main(arg)
-   newEmbed = discord.Embed(title="Product Spec Review", description=output, color=3447003)
-   
-   await ctx.send(embed=newEmbed)
+      await ctx.send(embed=peer, delete_after=0)
+
+      output = main(arg)
+      new_embed = discord.Embed(title="Product Spec Review", description=output, color=3447003)
+
+      embeds = []
+
+      for i, j in output.items():
+         embeds.append(discord.Embed(title=f"{i}", description=output[i], color=3447003))
+      
+      return await Paginator.Simple().start(ctx, pages=embeds)
+
+   output = 'Currently, PEER is only available to AI Camp Team members. Sorry for the inconvenience. If you are an AI Camp Team member, please use PEER in the Tech Team channel.'
+   new_embed = discord.Embed(title="Not The Right Channel!", description=output, color=3447003)
+   return await ctx.send(embed=new_embed)
 
 bot.run(os.environ['BOT_TOKEN'])
