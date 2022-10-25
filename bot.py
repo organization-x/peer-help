@@ -29,4 +29,4 @@ async def peer(ctx, arg):
    
    await ctx.send(embed=newEmbed)
 
-bot.run(os.environ['product_spec_bot'])
+bot.run(os.environ['BOT_TOKEN'])
