@@ -35,10 +35,10 @@ def main(url):
     
     feedback_summary = response = openai.Completion.create(
         model = "text-davinci-002",
-        prompt = f"The following text is written feedback of a product specification. Write a one-hundred fifty word summary of the feedback. The summary must be one paragraph and well-written.\n\nFEEDBACK\n\n{total_feedback}",
+        prompt = f"The following text is written feedback of a product specification. Write a one-hundred fifty word summary of the feedback. The summary must be one paragraph and well-written.\n\nFEEDBACK:\n\n{total_feedback}\n\nWell written summary of the feedback:\n\n",
         temperature = 0.7,
         max_tokens = 512,
-        top_p = 0.6,
+        top_p = 0.8,
         frequency_penalty = 0,
         presence_penalty = 0
     )
