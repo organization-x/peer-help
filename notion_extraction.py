@@ -3,10 +3,6 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-
-
-notion_token = os.getenv("OPENAI_API_KEY1")
-
 def extract_id_from_url(url): 
     return url.split('-')[-1]
 

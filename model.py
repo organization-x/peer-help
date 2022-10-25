@@ -78,7 +78,7 @@ def get_prompts(parsed_product_spec):
             'presence_penalty' : 0
         }
     }
-
+    # print(parsed_product_spec.keys())
     for section in parsed_product_spec:
         if section in label_to_prompt:
             prompt = label_to_prompt[section]
@@ -92,13 +92,14 @@ async def get_text(session, url, params):
 
     async with session.post(url, json = params) as resp:
         prompt_text = await resp.json()
+        
         return prompt_text['choices'][0]['text']
+    
 
 async def main(url):
 
     prompts = get_prompts(parse_product_spec_text(extract_product_spec_text(extract_id_from_url(url))))
-    
-    
+ 
     async with aiohttp.ClientSession(headers = {'authorization' : f'Bearer {os.getenv("OPENAI_API_KEY1")}'}) as session:
 
         tasks = []
@@ -109,8 +110,9 @@ async def main(url):
         feedbacks = await asyncio.gather(*tasks)
        
     total_feedback = '\n'.join(feedbacks)
+    # print(feedbacks)
     return feedbacks
-    
+
 
     # for feedback in feedbacks:
     #     print(feedback)
