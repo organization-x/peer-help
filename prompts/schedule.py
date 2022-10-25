@@ -2,9 +2,6 @@ import os
 import openai
 from dotenv import load_dotenv
 
-load_dotenv()
-openai.api_key = os.getenv("API_KEY")
-
 def schedule_model(string):
     """ To evaluate a team's planned schedule of building their product
 

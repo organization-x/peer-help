@@ -1,23 +1,26 @@
-
 import discord
 from discord.ext import commands
 import os
 from model import main
 import Paginator
+from dotenv import load_dotenv
 
  
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='#', intents=intents)
 
+load_dotenv()
+
 
 @bot.command()
 async def peer(ctx, arg):
    peer = discord.Embed(title="PEER is Reviewing your Product Spec!", url="https://github.com/organization-x/peer-help", description="", color=3447003)
-   peer.set_image(url="https://cdn.dribbble.com/users/1148781/screenshots/3233207/media/3255674065b3b19a7f4227cd6e3be153.gif")
+   peer.set_image(url="https://cdn.dribbble.com/users/980063/screenshots/2460821/square-shape-morph2.gif")
 
    await ctx.send(embed=peer, delete_after=7)
-   output = await main(arg)
+   
+   output = main(arg)
    total_feedback = '\n'.join(output)
    
    newEmbed = discord.Embed(title="Product Spec Review", description=total_feedback, color=3447003)
@@ -28,15 +31,13 @@ async def peer(ctx, arg):
 async def pages(ctx, arg):
    
    embeds = []
-   output = await main(arg)
+   output = main(arg)
    
    number = 0
    for i in range(len(output)):
       if (output[number] != "This section does not provide enough information to give feedback."):
-         
          embeds.append(discord.Embed(title=f"Embed #{(i + 1)}", description=output[number]))
       number+=1
-
    
    await Paginator.Simple().start(ctx, pages=embeds)
 
@@ -44,3 +45,4 @@ bot.run(os.getenv("BOT_TOKEN"))
 
 # https://cdn.dribbble.com/users/1148781/screenshots/3233207/media/3255674065b3b19a7f4227cd6e3be153.gif
 # https://cdn.dribbble.com/users/980063/screenshots/2460821/square-shape-morph2.gif
+

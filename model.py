@@ -1,143 +1,53 @@
-import openai
 from notion_extraction import extract_product_spec_text, parse_product_spec_text, extract_id_from_url
+from prompts import happy_path, milestones, problem, schedule, solution, success_criteria, target_users, tech_stack
 import requests
 import os
 from dotenv import load_dotenv
-#from text.peer import notion_token
-
-# unused labels = ['', '', '', 'Success Criteria', 'Success Metrics', '', '', '', '']
-    
-# until the backend is implemented
+import openai
 
 load_dotenv()
 
+openai.api_key = os.getenv('OPENAI_API_KEY1')
 
-import aiohttp
-import asyncio
-# bearer_token = os.environ['openai_api_key']
+def main(url):
 
-def get_prompts(parsed_product_spec):
-
-    prompts = []
-
-    label_to_prompt = {
-        'Problem Statement' : {
-            'prompt' : "The following paragraph is the problem statement section of a product specification. First, respond with feedback on how well the problem statement has been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.25,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
-        },
-        'Solution Statement' : {
-            'prompt' : "The following paragraph is the solution statement section of a product specification. First, respond with feedback on how well the solution statement has been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.25,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
-        },
-        'Who Has This Problem?' : {
-            'prompt' : "The following paragraph is explaining the audience or target userbase of a product specification. First, respond with feedback on how well the audience is decribed. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.25,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
-        },
-        'Milestones' : {
-            'prompt' : "The following paragraph is the milestones section of a product specification. First, respond with feedback on how well the milestones have been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.25,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
-        },
-        'Schedule of Deliverables' : {
-            'prompt' : "The following paragraph is the schedule section of a product specification. First, respond with feedback on how well the schedule has been planned. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.25,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
-        },
-        'Tech Stack' : {
-            'prompt' : "The following paragraph is the technology stack section of a product specification. First, respond with feedback on how well the technolgy stack has been written. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.25,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
-        },
-        'Happy Path' : {
-            'prompt' : "The following paragraph is the happy path section of a product specification. First, respond with feedback on how well the happy path conveys the general path needed to be taken in this project. Next, explain why this feedback was given along with specific feedback on what can be improved. You must write several in-depth sentences.",
-            'temperature' : 0.25,
-            'max_tokens' : 512,
-            'top_p' : 1,
-            'frequency_penalty' : 0,
-            'presence_penalty' : 0
-        }
-    }
-    # print(parsed_product_spec.keys())
-    for section in parsed_product_spec:
-        if section in label_to_prompt:
-            prompt = label_to_prompt[section]
-
-            prompt['prompt'] += f"\n\n{parsed_product_spec[section]}"
-
-            prompts.append(prompt)
-    return prompts
-
-async def get_text(session, url, params):
-
-    async with session.post(url, json = params) as resp:
-        prompt_text = await resp.json()
-        
-        return prompt_text['choices'][0]['text']
+    prompts = parse_product_spec_text(extract_product_spec_text(extract_id_from_url(url)))
+    prompts = {key : value for key, value in prompts.items() if len(value) > 0}
     
+    feedbacks = []
+    
+    if 'Problem Statement' in prompts:
+        feedbacks.append(happy_path.happy_path_model(prompts['Problem Statement']))
+    if 'Solution Statement' in prompts:
+        feedbacks.append(solution.solution_model(prompts['Solution Statement']))
+    if 'Who Has This Problem?' in prompts:
+        feedbacks.append(target_users.target_users_model(prompts['Who Has This Problem?']))
+    if 'Success Criteria' in prompts:
+        feedbacks.append(success_criteria.success_criteria(prompts['Success Criteria']))
+    if 'Milestones' in prompts:
+        feedbacks.append(milestones.milestones_model(prompts['Milestones']))
+    if 'Schedule of Deliverables' in prompts:
+        feedbacks.append(schedule.schedule_model(prompts['Schedule of Deliverables']))
+    if 'Tech Stack' in prompts:
+        feedbacks.append(tech_stack.tech_stack_model(prompts['Tech Stack']))
+    if 'Happy Path' in prompts:
+        feedbacks.append(happy_path.happy_path_model(prompts['Happy Path']))
 
-async def main(url):
-
-    prompts = get_prompts(parse_product_spec_text(extract_product_spec_text(extract_id_from_url(url))))
- 
-    async with aiohttp.ClientSession(headers = {'authorization' : f'Bearer {os.getenv("OPENAI_API_KEY1")}'}) as session:
-
-        tasks = []
-        for prompt in prompts:
-            url = 'https://api.openai.com/v1/engines/text-davinci-002/completions'
-            tasks.append(asyncio.ensure_future(get_text(session, url, prompt)))
-
-        feedbacks = await asyncio.gather(*tasks)
-       
-    total_feedback = '\n'.join(feedbacks)
-    # print(feedbacks)
+    
     return feedbacks
 
-
-    # for feedback in feedbacks:
-    #     print(feedback)
-
+    # FOR SUMMARIZATION TESTING
+    # feedback_summary = response = openai.Completion.create(
+    #     model = "text-davinci-002",
+    #     prompt = f"The following text is written feedback of a product specification. Write a one-hundred fifty word summary of the feedback. The summary must be one paragraph and well-written.\n\nFEEDBACK:\n\n{total_feedback}\n\nWell written summary of the feedback:\n\n",
+    #     temperature = 0.7,
+    #     max_tokens = 512,
+    #     top_p = 0.8,
+    #     frequency_penalty = 0,
+    #     presence_penalty = 0
+    # )
     
-    # feedback_summary = requests.post('https://api.openai.com/v1/engines/text-davinci-002/completions',
-        
-    #     headers = {'authorization' : f'Bearer {OPENAI_API_KEY1}'},
-    #     json = {
-    #         'prompt' : f"The following text is written feedback of a product specification. Write a 150 WORD SUMMARY of the feedback and include key details.\n\nFEEDBACK\n\n{total_feedback}",
-    #         'temperature' : 0.3,
-    #         'max_tokens' : 512,
-    #         'top_p' : 1,
-    #         'frequency_penalty' : 0,
-    #         'presence_penalty' : 0
-    #     }
-    # ).json()
- 
-    # return feedback_summary['choices'][0]['text']
-
-
-
-
-
-
+    # return feedback_summary["choices"][0]["text"]
 
 
 
