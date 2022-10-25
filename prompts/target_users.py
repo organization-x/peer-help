@@ -17,7 +17,7 @@ def target_users_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is the target users section of a product specification. Evaluate how well it has been written and give specific feedback on what can be improved. Write several in-depth sentences.\n{string}",
+            prompt = f"The following paragraph should describe who a product is for. First, evaluate how well it describes who it's for and provide a score from 1-10. After, give specific feedback on what can be improved.\n\n\n{string}\n\n\nSCORE:",
             temperature = 0.2,
             max_tokens = 512,
             top_p = 1,
