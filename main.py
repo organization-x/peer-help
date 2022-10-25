@@ -11,7 +11,7 @@ bot = commands.Bot(command_prefix='#', intents=intents)
 @bot.command()
 async def peer(ctx, arg):
 
-   if ctx.channel.name in ['kudos', 'bot_testing', 'general']:
+   if ctx.channel.name in ['tech-team', 'bot_testing']:
       peer = discord.Embed(title="PEER is Reviewing your Product Spec!", url="https://github.com/organization-x/peer-help", description="", color=3447003)
       peer.set_image(url="https://cdn.dribbble.com/users/980063/screenshots/2460821/square-shape-morph2.gif")
 
