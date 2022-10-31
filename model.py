@@ -1,10 +1,12 @@
+from dotenv import load_dotenv
 from notion_extraction import extract_product_spec_text, parse_product_spec_text, extract_id_from_url
 from prompts import happy_path, milestones, problem, schedule, solution, success_criteria, target_users, tech_stack
 import requests
 import os
 import openai
-
-openai.api_key = os.environ['OPENAI_API_KEY1']
+from dotenv import load_dotenv
+load_dotenv()
+openai.api_key = os.getenv('OPENAI_API_KEY1')
 
 def main(url):
 
