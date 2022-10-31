@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import os
-#import Paginator
+import Paginator
 from model import main
 from dotenv import load_dotenv
 load_dotenv()
