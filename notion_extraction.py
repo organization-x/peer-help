@@ -1,7 +1,10 @@
 import requests
 import os
+from dotenv import load_dotenv
 
-notion_token = os.environ['NOTION_TOKEN1']
+
+load_dotenv()
+notion_token = os.getenv('NOTION_TOKEN')
 
 def extract_id_from_url(url): 
     return url.split('-')[-1]
