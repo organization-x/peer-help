@@ -1,9 +1,10 @@
 import discord
 from discord.ext import commands
 import os
-import Paginator
+#import Paginator
 from model import main
- 
+from dotenv import load_dotenv
+load_dotenv()
 intents = discord.Intents.default()
 intents.message_content = True
 intents.members = True
@@ -32,4 +33,4 @@ async def peer(ctx, arg):
    new_embed = discord.Embed(title="Not The Right Channel!", description=output, color=3447003)
    return await ctx.send(embed=new_embed)
 
-bot.run(os.environ['BOT_TOKEN'])
+bot.run(os.getenv('product_spec_bot'))
