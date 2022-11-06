@@ -1,6 +1,8 @@
 import requests
 import os
 from dotenv import load_dotenv
+import openai
+import time
 
 
 load_dotenv()
@@ -72,15 +74,39 @@ def match_name_to_label(name): # Matches a name to a product spec label
     highest_similarity_score = 0
     most_similar = None
     
-    for label in labels: # Finds the label with the highest similarity score
-        
-        similarity_score = jaccard_similarity(label.split(), name.split())
-        
-        if similarity_score > highest_similarity_score:
+    openai.api_key = os.getenv("OPENAI_API_KEY1")
+
+    labels = ['Problem Statement', 'Solution Statement', 'Who Has This Problem?', 'Success Criteria', 'Success Metrics', 'Milestones', 'Schedule of Deliverables', 'Tech Stack', 'Happy Path']
+
+    questionable_header = name
+    response = openai.Completion.create(
+    model="text-curie-001",
+    prompt=f"prompt: answer the following question only using the header_list, then say where they are in the list\n\nheader_list: 'Problem Statement', 'Solution Statement', 'Who Has This Problem?', 'Success Criteria', 'Success Metrics', 'Milestones', 'Schedule of Deliverables', 'Tech Stack', 'Happy Path'\n\nquestion: out of the header_list which one is most similar to the header \"Other Ideas Further areas of improvement:\"?\n\noutput: \"Other Ideas Further areas of improvement\" is most similar to the header \"Milestones\". milestones is the sixth in header_list\n\nquestion: out of the header_list which one is most similar to the header \"Success Criteria\"?\n\noutput: \"Success Criteria\" is most similar to the header \"Success Criteria\" Success Criteria is the fourth in header_list.\n\nquestion: out of the header_list which one is most similar to the header \"What The Product Will Not Do\"?\n\noutput: \"What The Product Will Not Do\" is most similar to the header  \"Success Criteria\" Success Criteria is the fourth in header_list.\n\nquestion: out of the header_list which one is most similar to the header \"{questionable_header}\"?\n\noutput: \"{questionable_header}\" is most similar to the header  ",
+    temperature=1,
+    max_tokens=75,
+    top_p=1,
+    frequency_penalty=0,
+    presence_penalty=0
+    )
+    corrected_header = response["choices"][0]["text"]
+    redone_lables = corrected_header.replace('"',"")
+    for x in labels:
+       if x in redone_lables: 
+            print('ai generated labels worked', x)
+            return x
             
+        
+    for y in range(2): print('jacard runnging as backup for[gtp3 failure]')
+    print(f"'{redone_lables}' is the out come of '{questionable_header}' delete this line of code later")
+    for label in labels: # Finds the label with the highest similarity score
+                    
+        similarity_score = jaccard_similarity(label.split(), name.split())
+                
+        if similarity_score > highest_similarity_score:
+                    
             most_similar = label
             highest_similarity_score = similarity_score
-    
+            
     return most_similar
 
 
