@@ -17,14 +17,37 @@ def solution_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is the solution statement section of a product specification. First, evaluate the solution and provide a score from 1-10. After, give specific feedback on what can be improved.\n\n\n{string}\n\n\nSCORE:",
+            prompt = f"The following paragraph is the solution statement section of a product specification. Evaluate the solution and give specific feedback on what can be improved.\n\n\n{string}\n\n\nFEEDBACK:\n\n",
             temperature = 1,
             max_tokens = 512,
             top_p = 0.3,
             frequency_penalty = 0,
             presence_penalty = 0
         )
-        return response["choices"][0]["text"]
+        return response["choices"][0]["text"].strip()
+    except Exception as e:
+        return f"solution: {e}" # placeholder for now
+
+def suggested_solution_rewrite(string, feedback):
+    """ To evaluate a product's solution statement
+
+    Args:
+        string (str): section of text extracted from Notion
+
+    Returns:
+        str: GPT's evaluation of the input
+    """
+    try:
+        response = openai.Completion.create(
+            model = "text-davinci-002",
+            prompt = f"The following is the solution statement from a product specification and a piece of feedback assessing the quality. Rewrite the product spec to make improvements suggested by the feedback. \n\nSOLUTION STATEMENT:\n\n{string}\n\nFEEDBACK:\n\n{feedback}\n\nREWRITE:\n\n",
+            temperature = 1,
+            max_tokens = 512,
+            top_p = 0.3,
+            frequency_penalty = 0,
+            presence_penalty = 0
+        )
+        return response["choices"][0]["text"].strip()
     except Exception as e:
         return f"solution: {e}" # placeholder for now
 

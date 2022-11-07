@@ -17,16 +17,39 @@ def milestones_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph is the milestones section of a product specification. First, evaluate the milestones and provide a score from 1-10. After, give specific feedback on what can be improved.\n\n\n{string}\n\n\nSCORE:",
+            prompt = f"The following paragraph is the milestones section of a product specification. Evaluate the milestones and give specific feedback on what can be improved.\n\n\n{string}\n\n\nFEEDBACK:",
             temperature = 1,
             max_tokens = 512,
             top_p = 0.5,
             frequency_penalty = 0,
             presence_penalty = 0,
         )
-        return response["choices"][0]["text"]
+        return response["choices"][0]["text"].strip()
     except Exception as e:
         return f"milestones: {e}" # placeholder for now
+
+def suggested_milestones_rewrite(string, feedback):
+    """ To evaluate a product's problem statement
+
+    Args:
+        string (str): section of text extracted from Notion
+
+    Returns:
+        str: GPT's evaluation of the input
+    """
+    try:
+        response = openai.Completion.create(
+            model="text-davinci-002",
+            prompt=f"The following are the milestones from a product specification and a piece of feedback assessing the quality. Rewrite the milestones to make improvements suggested by the feedback. \n\nMILESTONES:\n\n{string}\n\nFEEDBACK:\n\n{feedback}\n\nREWRITE:\n\n",
+            temperature=0.7,
+            max_tokens=256,
+            top_p=1,
+            frequency_penalty=0.95,
+            presence_penalty=0.95
+        )
+        return response["choices"][0]["text"].strip()
+    except Exception as e:
+        return f"problem: {e}" # placeholder for now
 
 # for internal testing
 

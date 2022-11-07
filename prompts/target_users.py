@@ -17,17 +17,39 @@ def target_users_model(string):
     try:
         response = openai.Completion.create(
             model = "text-davinci-002",
-            prompt = f"The following paragraph should describe who a product is for. First, evaluate how well it describes who it's for and provide a score from 1-10. After, give specific feedback on what can be improved.\n\n\n{string}\n\n\nSCORE:",
+            prompt = f"The following paragraph should describe who a product is for. Evaluate how well it describes who it's for and give specific feedback on what can be improved.\n\n\n{string}\n\n\nFEEDBACK:\n\n",
             temperature = 0.2,
             max_tokens = 512,
             top_p = 1,
             frequency_penalty = 0,
             presence_penalty = 1
         )
-        return response["choices"][0]["text"]
+        return response["choices"][0]["text"].strip()
     except Exception as e:
         return f"target_users: {e}" # placeholder for now
 
+def suggested_target_users_rewrite(string, feedback):
+    """ To evaluate a product's problem statement
+
+    Args:
+        string (str): section of text extracted from Notion
+
+    Returns:
+        str: GPT's evaluation of the input
+    """
+    try:
+        response = openai.Completion.create(
+            model="text-davinci-002",
+            prompt=f"The following is a section from a product specification and a piece of feedback assessing the quality. Rewrite the section to make improvements suggested by the feedback. \n\nSECTION:\n\n{string}\n\nFEEDBACK:\n\n{feedback}\n\nREWRITE:\n\n",
+            temperature=0.7,
+            max_tokens=256,
+            top_p=1,
+            frequency_penalty=0.95,
+            presence_penalty=0.95
+        )
+        return response["choices"][0]["text"].strip()
+    except Exception as e:
+        return f"problem: {e}" # placeholder for now
 
 # for internal testing
 
