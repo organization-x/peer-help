@@ -22,21 +22,29 @@ def main(url):
     feedbacks = {}
     
     if 'Problem Statement' in prompts:
-        feedbacks['Problem Statement'] = happy_path.happy_path_model(prompts['Problem Statement'])
+        feedbacks['Problem Statement'] = f"**PEER Feedback**\n\n{problem.problem_model(prompts['Problem Statement'])}"
+        feedbacks['Problem Statement'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{problem.suggested_problem_statement_rewrite(prompts['Problem Statement'], feedbacks['Problem Statement'])}"
     if 'Solution Statement' in prompts:
-        feedbacks['Solution Statement'] = solution.solution_model(prompts['Solution Statement'])
+        feedbacks['Solution Statement'] = f"**PEER Feedback**\n\n{solution.solution_model(prompts['Solution Statement'])}"
+        feedbacks['Solution Statement'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{problem.suggested_problem_statement_rewrite(prompts['Solution Statement'], feedbacks['Solution Statement'])}"
     if 'Who Has This Problem?' in prompts:
-        feedbacks['Who Has This Problem?'] = target_users.target_users_model(prompts['Who Has This Problem?'])
+        feedbacks['Who Has This Problem?'] = f"**PEER Feedback**\n\n{target_users.target_users_model(prompts['Who Has This Problem?'])}"
+        feedbacks['Who Has This Problem?'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{target_users.suggested_target_users_rewrite(prompts['Who Has This Problem?'], feedbacks['Who Has This Problem?'])}"
     if 'Success Criteria' in prompts:
-        feedbacks['Success Criteria'] = success_criteria.success_criteria(prompts['Success Criteria'])
+        feedbacks['Success Criteria'] = f"**PEER Feedback**\n\n{success_criteria.success_criteria(prompts['Success Criteria'])}"
+        feedbacks['Success Criteria'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{success_criteria.suggested_success_criteria_rewrite(prompts['Success Criteria'], feedbacks['Success Criteria'])}"
     if 'Milestones' in prompts:
-        feedbacks['Milestones'] = milestones.milestones_model(prompts['Milestones'])
+        feedbacks['Milestones'] = f"**PEER Feedback**\n\n{milestones.milestones_model(prompts['Milestones'])}"
+        feedbacks['Milestones'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{milestones.suggested_milestones_rewrite(prompts['Milestones'], feedbacks['Milestones'])}"
     if 'Schedule of Deliverables' in prompts:
-        feedbacks['Schedule of Deliverables'] = schedule.schedule_model(prompts['Schedule of Deliverables'])
+        feedbacks['Schedule of Deliverables'] = f"**PEER Feedback**\n\n{schedule.schedule_model(prompts['Schedule of Deliverables'])}"
+        feedbacks['Schedule of Deliverables'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{schedule.suggested_schedule_rewrite(prompts['Schedule of Deliverables'], feedbacks['Schedule of Deliverables'])}"
     if 'Tech Stack' in prompts:
-        feedbacks['Tech Stack'] = tech_stack.tech_stack_model(prompts['Tech Stack'])
+        feedbacks['Tech Stack'] = f"**PEER Feedback**\n\n{tech_stack.tech_stack_model(prompts['Tech Stack'])}"
+        feedbacks['Tech Stack'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{tech_stack.suggested_tech_stack_rewrite(prompts['Tech Stack'], feedbacks['Tech Stack'])}"
     if 'Happy Path' in prompts:
-        feedbacks['Happy Path'] = happy_path.happy_path_model(prompts['Happy Path'])
+        feedbacks['Happy Path'] = f"**PEER Feedback**\n\n{happy_path.happy_path_model(prompts['Happy Path'])}"
+        feedbacks['Happy Path'] += f"\n\n**Suggested Rewrite Using PEER's Feedback**:\n\n{happy_path.suggested_happy_path_rewrite(prompts['Happy Path'], feedbacks['Happy Path'])}"
     """
     total_feedback = '\n\n'.join(feedbacks)
 
