@@ -16,7 +16,7 @@ def target_users_model(string):
     """
     try:
         response = openai.Completion.create(
-            model = "text-davinci-002",
+            model = "text-davinci-003",
             prompt = f"The following paragraph should describe who a product is for. Evaluate how well it describes who it's for and give specific feedback on what can be improved.\n\n\n{string}\n\n\nFEEDBACK:\n\n",
             temperature = 0.2,
             max_tokens = 512,
