@@ -39,7 +39,7 @@ def suggested_happy_path_rewrite(string, feedback):
     """
     try:
         response = openai.Completion.create(
-            model="text-davinci-002",
+            model="text-davinci-003",
             prompt=f"The following is the happy path from a product specification and a piece of feedback assessing the quality. Rewrite the happy path to make improvements suggested by the feedback. \n\nHAPPY PATH:\n\n{string}\n\nFEEDBACK:\n\n{feedback}\n\nREWRITE:\n\n",
             temperature=0.7,
             max_tokens=256,
