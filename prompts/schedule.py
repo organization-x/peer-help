@@ -16,7 +16,7 @@ def schedule_model(string):
     """
     try:
         response = openai.Completion.create(
-            model = "text-davinci-002",
+            model = "text-davinci-003",
             prompt = f"The following paragraph is the schedule section of a product specification. Evaluate the schedule and give specific feedback on what can be improved.\n\n\n{string}\n\n\nFEEDBACK:\n\n",
             temperature = 1,
             max_tokens = 512,
