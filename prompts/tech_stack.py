@@ -16,7 +16,7 @@ def tech_stack_model(string):
     """
     try:
         response = openai.Completion.create(
-            model = "text-davinci-002",
+            model = "text-davinci-003",
             prompt = f"The following paragraph should be a technology stack. Evaluate the section and give specific feedback on what can be improved.\n\n\n{string}\n\n\nFEEDBACK:",
             temperature = 1,
             max_tokens = 512,
