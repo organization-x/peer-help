@@ -16,7 +16,7 @@ def solution_model(string):
     """
     try:
         response = openai.Completion.create(
-            model = "text-davinci-002",
+            model = "text-davinci-003",
             prompt = f"The following paragraph is the solution statement section of a product specification. Evaluate the solution and give specific feedback on what can be improved.\n\n\n{string}\n\n\nFEEDBACK:\n\n",
             temperature = 1,
             max_tokens = 512,
